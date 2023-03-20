@@ -3,6 +3,7 @@ import requests
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 import time
 import re
 
@@ -19,11 +20,13 @@ def scrape_site_for_facebook(url):
     
     #Use selenium if site is JS
     if(len(links) <= 0):
-        options = webdriver.ChromeOptions()
-        options.add_argument('headless')
-        capa = DesiredCapabilities.CHROME
-        capa["pageLoadStrategy"] = "none"
-        driver = webdriver.Chrome(options=options, desired_capabilities=capa)
+        chrome_options = Options()
+        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--no-sandbox")
+
+        driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
         driver.set_window_size(1440,900)
         driver.get(url)
         time.sleep(5)
@@ -52,12 +55,13 @@ def scrape_site_for_email(url):
 
         
 def parse_facebook_for_email(url):
-    options = webdriver.ChromeOptions()
-    options.add_argument('headless')
-    options.add_argument("--disable-3d-api")
-    capa = DesiredCapabilities.CHROME
-    capa["pageLoadStrategy"] = "none"
-    driver = webdriver.Chrome(options=options, desired_capabilities=capa)
+    chrome_options = Options()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
     driver.set_window_size(1440,900)
     driver.get(url)
     time.sleep(5)
