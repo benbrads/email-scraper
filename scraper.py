@@ -13,20 +13,6 @@ import time
 import re
 import os
 
-MAJOR_BROWSERS = [
-    # Chrome
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
-    'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0',
-    # Firefox
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.2 Safari/605.1.15',
-    # Safari
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
-    # Edge
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134',
-]
-
-
 def scrape_site_for_facebook(url): 
     facebook_link = ""
     #Check whether site is facebook already
@@ -44,7 +30,6 @@ def scrape_site_for_facebook(url):
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--no-sandbox")
-        chrome_options.add_argument(f'user-agent={random.choice(MAJOR_BROWSERS)}')
         chrome_options.add_argument('start-maximized')
 
         driver = uc.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
@@ -86,10 +71,9 @@ def parse_facebook_for_email(url):
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument('start-maximized')
-    chrome_options.add_argument(f'user-agent={random.choice(MAJOR_BROWSERS)}')
     driver = uc.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
     driver.get(url)
-    wait = WebDriverWait(driver, 5)
+    ewait = WebDriverWait(driver, 5)
     wait.until(EC.presence_of_element_located((By.XPATH, "/html/body")))
     plain_text = driver.find_element(By.XPATH, "/html/body").text
     print(plain_text)
