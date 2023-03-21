@@ -7,6 +7,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from fake_useragent import UserAgent
+import undetected_chromedriver as uc
 import time
 import re
 import os
@@ -32,7 +33,7 @@ def scrape_site_for_facebook(url):
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument(f'user-agent={user_agent}')
 
-        driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+        driver = uc.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
         driver.set_window_size(1440,900)
         driver.get(url)
         wait = WebDriverWait(driver, 10)
@@ -71,7 +72,7 @@ def parse_facebook_for_email(url):
     chrome_options.add_argument(f'user-agent={user_agent}')
 
 
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+    driver = uc.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
     driver.set_window_size(1440,900)
     driver.get(url)
     wait = WebDriverWait(driver, 10)
