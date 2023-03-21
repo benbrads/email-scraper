@@ -34,7 +34,7 @@ def scrape_site_for_facebook(url):
 
         driver = uc.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
         driver.get(url)
-        wait = WebDriverWait(driver, 5)
+        wait = WebDriverWait(driver, 10)
         wait.until(EC.presence_of_element_located((By.XPATH, "/html/body")))
         plain_text = driver.page_source
         business_soup = BeautifulSoup(plain_text, 'html.parser')
@@ -73,7 +73,7 @@ def parse_facebook_for_email(url):
     chrome_options.add_argument('start-maximized')
     driver = uc.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
     driver.get(url)
-    wait = WebDriverWait(driver, 5)
+    wait = WebDriverWait(driver, 10)
     wait.until(EC.presence_of_element_located((By.XPATH, "/html/body")))
     plain_text = driver.find_element(By.XPATH, "/html/body").text
     print(plain_text)
