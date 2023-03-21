@@ -41,6 +41,7 @@ def scrape_site_for_facebook(url):
         plain_text = driver.page_source
         business_soup = BeautifulSoup(plain_text, 'html.parser')
         links = business_soup.find_all('a')
+        driver.close()
     #from links, find one to facebook.
     for link in links:
         if "href" in link.attrs:
@@ -81,6 +82,7 @@ def parse_facebook_for_email(url):
     print(plain_text)
     no_newline = plain_text.strip('\n')
     email = re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", no_newline)
+    driver.close()
     if(email):
         return email[0]
     else:
