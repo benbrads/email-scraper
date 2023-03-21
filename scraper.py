@@ -42,6 +42,7 @@ def scrape_site_for_facebook(url):
         business_soup = BeautifulSoup(plain_text, 'html.parser')
         links = business_soup.find_all('a')
         driver.close()
+        print("Selenium Link Path")
     #from links, find one to facebook.
     for link in links:
         if "href" in link.attrs:
@@ -50,6 +51,7 @@ def scrape_site_for_facebook(url):
     return facebook_link
 
 def scrape_site_for_email(url):
+    print("Scrape Site Path")
     #Else, find facebook link from site
     business_site = requests.get(url)
     site_email = ""
@@ -79,6 +81,7 @@ def parse_facebook_for_email(url):
     wait = WebDriverWait(driver, 30)
     wait.until(EC.presence_of_element_located((By.XPATH, "/html/body")))
     plain_text = driver.find_element(By.XPATH, "/html/body").text
+    print("SCRAPING THE BOOK")
     print(plain_text)
     no_newline = plain_text.strip('\n')
     email = re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", no_newline)
