@@ -70,6 +70,9 @@ def parse_facebook_for_email(url):
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument('start-maximized')
     driver = uc.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+    driver.delete_all_cookies()
+    driver.execute_script("window.localStorage.clear();")
+    driver.execute_script("window.sessionStorage.clear();")
     try:
         driver.get(url)
         wait = WebDriverWait(driver, 10)
