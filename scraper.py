@@ -9,7 +9,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from fake_useragent import UserAgent
 import undetected_chromedriver as uc
-from undetected_chromedriver import Proxy
 import time
 import re
 import os
