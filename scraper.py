@@ -25,8 +25,7 @@ def scrape_site_for_facebook(url):
     #Use selenium if site is JS
     if(len(links) <= 0):
         chrome_options = Options()
-        ua = UserAgent()
-        user_agent = ua.random
+        user_agent = user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"
         chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--disable-dev-shm-usage")
@@ -64,8 +63,7 @@ def scrape_site_for_email(url):
         
 def parse_facebook_for_email(url):
     chrome_options = Options()
-    ua = UserAgent()
-    user_agent = ua.random
+    user_agent = user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
