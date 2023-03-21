@@ -77,6 +77,7 @@ def parse_facebook_for_email(url):
     print("HERE")
     driver = uc.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
     driver.get(url)
+    print("HERE2")
     wait = WebDriverWait(driver, 5)
     print("HERE2")
     wait.until(EC.presence_of_element_located((By.XPATH, "/html/body")))
