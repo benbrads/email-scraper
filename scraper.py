@@ -76,7 +76,6 @@ def parse_facebook_for_email(url):
     chrome_options.add_argument('start-maximized')
 
     driver = uc.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
-    driver.set_window_size(1440,900)
     driver.get(url)
     wait = WebDriverWait(driver, 5)
     wait.until(EC.presence_of_element_located((By.XPATH, "/html/body")))
