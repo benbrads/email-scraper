@@ -32,7 +32,6 @@ def scrape_site_for_facebook(url):
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument(f'user-agent={user_agent}')
-        chrome_options.add_argument('start-maximized')
 
         driver = uc.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
         driver.get(url)
@@ -74,7 +73,7 @@ def parse_facebook_for_email(url):
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument(f'user-agent={user_agent}')
-
+    chrome_options.add_argument('start-maximized')
 
     driver = uc.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
     driver.set_window_size(1440,900)
@@ -82,6 +81,7 @@ def parse_facebook_for_email(url):
     wait = WebDriverWait(driver, 30)
     wait.until(EC.presence_of_element_located((By.XPATH, "/html/body")))
     plain_text = driver.find_element(By.XPATH, "/html/body").text
+    print(success)
     print("SCRAPING THE BOOK")
     print(plain_text)
     no_newline = plain_text.strip('\n')
