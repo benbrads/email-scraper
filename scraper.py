@@ -75,7 +75,7 @@ def parse_facebook_for_email(url):
     driver.get(url)
     wait = WebDriverWait(driver, 10)
     wait.until(EC.presence_of_element_located((By.XPATH, "/html/body")))
-    plain_text = driver.find_element(By.XPATH, "/html/body").text
+    plain_text = driver.page_source
     print(plain_text)
     no_newline = plain_text.strip('\n')
     email = re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", no_newline)
