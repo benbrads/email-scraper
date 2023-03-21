@@ -4,6 +4,8 @@ from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
 import re
 import os
@@ -30,7 +32,8 @@ def scrape_site_for_facebook(url):
         driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
         driver.set_window_size(1440,900)
         driver.get(url)
-        time.sleep(5)
+        wait = WebDriverWait(driver, 10)
+        wait.until(EC.presence_of_element_located((By.XPATH, "/html/body")))
         plain_text = driver.page_source
         business_soup = BeautifulSoup(plain_text, 'html.parser')
         links = business_soup.find_all('a')
@@ -65,8 +68,10 @@ def parse_facebook_for_email(url):
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
     driver.set_window_size(1440,900)
     driver.get(url)
-    time.sleep(5)
+    wait = WebDriverWait(driver, 10)
+    wait.until(EC.presence_of_element_located((By.XPATH, "/html/body")))
     plain_text = driver.find_element(By.XPATH, "/html/body").text
+    print(plain_text)
     no_newline = plain_text.strip('\n')
     email = re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", no_newline)
     if(email):
