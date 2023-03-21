@@ -27,7 +27,6 @@ def scrape_site_for_facebook(url):
     #Use selenium if site is JS
     if(len(links) <= 0):
         chrome_options = Options()
-        userAgent = random.choice(user_agents)
         chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
@@ -66,7 +65,6 @@ def scrape_site_for_email(url):
         
 def parse_facebook_for_email(url):
     chrome_options = Options()
-    userAgent = random.choice(user_agents)
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
