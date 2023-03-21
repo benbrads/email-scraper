@@ -48,6 +48,7 @@ def scrape_site_for_facebook(url):
         if "href" in link.attrs:
             if "facebook" in link['href']:
                 facebook_link = link['href']
+    print(facebook_link)
     return facebook_link
 
 def scrape_site_for_email(url):
