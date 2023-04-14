@@ -1,1 +1,1 @@
-passed a website, returns email :)
+passed a website for a business, returns email :)
